@@ -3,6 +3,5 @@ from . import views
 
 
 urlpatterns = [
-    url('^auth/', views.auth, name='auth'),
-    url('^$', views.index, name='index'),
+    url('', views.auth, name='auth'),
 ]

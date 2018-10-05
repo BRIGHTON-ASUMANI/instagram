@@ -18,6 +18,5 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url('^auth/', include('instagram.urls')),
     url('', include('instagram.urls')),
 ]
