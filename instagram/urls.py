@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    url('', views.auth, name='auth'),
-    # url('login/', views.login_user, name='login'),
+    url('', views.index, name='index'),
+    #url('login/', views.login_user, name='login'),
 ]
