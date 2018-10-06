@@ -11,3 +11,6 @@ class Post(models.Model):
     posted_by = models.ForeignKey(User,on_delete=models.CASCADE)
     pub_date = models.DateTimeField(auto_now_add=True)
     post_image = models.ImageField(upload_to = 'posts/', blank = True)
+
+    def __str__(self):
+        return self.title

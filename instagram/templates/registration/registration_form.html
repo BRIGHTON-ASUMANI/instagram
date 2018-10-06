@@ -1,12 +1,40 @@
 {% extends "base.html" %}
 
 {% load bootstrap4 %}
+{% load static %}
 {% block content %}
 <div class="container">
   <div class="row">
     <!-- Empty div -->
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
+    <div class="col-lg-6 landing-left">
+    <div class="dummy-phone">
+    <div class="screen-shot">
+    <div class="carousel carousel-fade" data-ride='carousel'>
+    <div class="carousel-inner">
+    <div class="carousel-item active">
+    <img src="{% static 'images/girl.jpg'%}" style='height:427p;width:240;'>
+      </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/flower.jpg'%}" style='height:427;width:240;'>
+    </div>
+
+    <div class="carousel-item">
+      <img src="{% static 'images/cat.jpg'%}" style='height:427;width:240;'>
+      </div>
+    <div class="carousel-item">
+      <img src="{% static 'images/green.jpg'%}" style='height:427;width:240;'>
+    </div>
+    <div class="carousel-item">
+        <img src="{% static 'images/profile.jpg'%}" style='height:427;width:240;'>
+      </div>
+</div>
+</div>
+  </div>
+    </div>
+  </div>
+
+    <div class="col-lg-6 landing-right">
+    <div class='form-login box'>
       {% if form.errors %}
         <p> Some Information Might be Incorrect </p>
       {% endif %}
@@ -33,9 +61,8 @@
       </div>
 
     </div>
-    <!-- empty div -->
-    <div class="col-md-4"></div>
-  </div>
+</div>
+</div>
 </div>
 
 {% endblock %}
