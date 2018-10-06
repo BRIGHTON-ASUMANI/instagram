@@ -1,8 +1,11 @@
+from django.conf import settings
+from django.conf.urls.static import static
 from django.conf.urls import url
 from . import views
 
 
 urlpatterns = [
     url('', views.index, name='index'),
-    #url('login/', views.login_user, name='login'),
+    url('^post/', views.post, name='post'),
 ]
+urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
