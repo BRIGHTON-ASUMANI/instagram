@@ -39,9 +39,14 @@
 }
 
 /* landing */
-.landing-left{
-  .dummy-phone{
-    background : url("/static/images/cont.png");
+.landing-left .screen-shot{
+
+  position: absolute;
+  top: 99px;
+  right: 63px;
+}
+  /* .dummy-phone{
+    background-image: url("/static/images/cont.png");
     background-repeat: no-repeat;
     background-position: right 0;
     background-size: 454px 618px;
@@ -49,11 +54,7 @@
     height: 618px;
     margin-left: -35px;
     margin-right: -15px;
-    }
-.screen-shot{
-  position: absolute;
-  top: 99px;
-  right: 63px;
+    } */
 
   .item {
       position: absolute;
