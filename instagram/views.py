@@ -3,12 +3,19 @@ from django.contrib.auth.decorators import login_required
 from .forms import PostForm
 from .models import Image, Profile
 import datetime as dt
+
 # Create your views here.
 # @login_required(login_url='/accounts/login/')
 def index(request):
     image=Image.all_posts()
     date = dt.date.today
-    return render(request, 'index.html',{'date': date, 'image': image})
+    if request.method == 'POST':
+        form = SubForm(request.POST)
+        if form.is_valid():
+            print('valid')
+    else:
+        form = SubForm()
+    return render(request, 'index.html',{'date': date, 'image': image, "subForm":form})
 
 # @login_required(login_url='/accounts/login/')
 # def post(request):
