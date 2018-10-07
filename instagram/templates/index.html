@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <h1>finished my first project</h1>
 <a href="/accounts/register/">log in</a>
@@ -6,9 +7,9 @@
 {% for post in image%}
 {{post.name}}
 {{post.caption}}
-<img src="{{post.image.url}}">
+<img src="{{post.post_image.url}}">
 {% empty %}
 <h1>no post yet</h1>
-{% endblock %}
+{% endfor %}
 
 {% endblock %}
