@@ -5,12 +5,19 @@ from tinymce.models import HTMLField
 
 
 # Create your models here.
-class Post(models.Model):
-    title = models.CharField(max_length=60)
-    post = HTMLField()
-    posted_by = models.ForeignKey(User,on_delete=models.CASCADE)
+class Image(models.Model):
+    image_name = models.CharField(max_length=60)
+    image_caption = TextField()
+    profile = models.ForeignKey(User,on_delete=models.CASCADE)
+    image_name = models.CharField(max_length=60)
     pub_date = models.DateTimeField(auto_now_add=True)
-    post_image = models.ImageField(upload_to = 'posts/', blank = True)
+    post_image = models.ImageField(upload_to = 'posts/')
 
     def __str__(self):
-        return self.title
+        return self.image_name
+
+    @classmethod
+    def todays_news(cls):
+        today = dt.date.today()
+        post = cls.objects.filter(pub_date__date = today)
+        return post
