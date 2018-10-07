@@ -1,9 +1,9 @@
 from django import forms
-from .models import Post
+from .models import Image
 
 class PostForm(forms.ModelForm):
     class Meta:
-        model = Post
+        model = Image
         exclude = ['post', 'pub_date']
         widgets = {
             'tags': forms.CheckboxSelectMultiple(),
