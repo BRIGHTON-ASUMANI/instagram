@@ -1,11 +1,14 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
-
+from .models import Image, Profile
+import datetime as dt
 # Create your views here.
 # @login_required(login_url='/accounts/login/')
 def index(request):
-    return render(request, 'index.html', {})
+    image=Image.all_posts()
+    date = dt.date.today
+    return render(request, 'index.html',{'date': date, 'image': image})
 
 # @login_required(login_url='/accounts/login/')
 # def post(request):
