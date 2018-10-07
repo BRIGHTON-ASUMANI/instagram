@@ -9,13 +9,8 @@ import datetime as dt
 def index(request):
     image=Image.all_posts()
     date = dt.date.today
-    if request.method == 'POST':
-        form = SubForm(request.POST)
-        if form.is_valid():
-            print('valid')
-    else:
-        form = SubForm()
-    return render(request, 'index.html',{'date': date, 'image': image, "subForm":form})
+
+    return render(request, 'index.html',{'date': date, 'image': image})
 
 # @login_required(login_url='/accounts/login/')
 # def post(request):
