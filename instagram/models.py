@@ -5,6 +5,9 @@ from tinymce.models import HTMLField
 
 
 # Create your models here.
+class Subscribers(models.Model):
+    name = models.CharField(max_length = 30)
+    email = models.EmailField()
 
 class Profile(models.Model):
     profile = models.ImageField(upload_to = 'profile/')

@@ -49,27 +49,31 @@ margin-right: -15px;
   </div>
 
     <div class="col-lg-6 landing-right">
-
-
       {% if form.errors %}
-        <p> Some Information Might be Incorrect </p>
-      {% endif %}
-          <div class='form-login box'>
-          <h3 class="text-center core-sprite brand-name-img">Sign Up</h3>
-        
-          <form  action="/accounts/register/" method="post">
-            <!-- {% csrf_token %} -->
-            {% bootstrap_form form %}
-            <div class="form-group">
-              <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-            </div>
+          <p> Some Information Might be Incorrect </p>
+        {% endif %}
+        <div class="panel panel-default">
 
-            <input type="hidden" name="next" value="{{next}}">
+          <div class="panel-heading">
+            <h3 class="text-center">Sign Up</h3>
+          </div>
+          <div class="panel-body">
 
-          </form>
+            <form  action="/accounts/register/" method="post">
+              {% csrf_token %}
+              {% bootstrap_form form %}
+              <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+              </div>
 
+              <input type="hidden" name="next" value="{{next}}">
 
-    </div>
+            </form>
+
+          </div>
+
+        </div>
+
 </div>
 </div>
 </div>
