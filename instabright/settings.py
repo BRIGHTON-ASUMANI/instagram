@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tinymce',
-    
+
 ]
 
 MIDDLEWARE = [
@@ -138,5 +138,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 ACCOUNT_ACTIVATION_DAYS = 2 # One-week activation window; you may, of course, use a different value.

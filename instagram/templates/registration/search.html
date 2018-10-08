@@ -1,0 +1,29 @@
+{%extends 'registration/base.html'%}
+{% block content %}
+{% load bootstrap4 %}
+<!--
+
+<div class="container-fluid">
+
+  <div class="row">
+    {% if articles%}
+      <h2> {{ profile|length }}}</h2>
+    {% else %}
+      <center><h1 class='my-font-bold'> {{message}} - Dogs</h></center>
+    {% endif %}
+
+  </div> -->
+
+
+
+  {% if profile %}
+  <section id="photos">
+    {% for user in profile %}
+    <img src="{{profile.profile.url}}" class="img-responsive " alt="Image" style="margin:10px;">
+
+    {% endfor %}
+  </section>
+
+  {% endif %}
+
+{% endblock %}

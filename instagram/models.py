@@ -35,13 +35,8 @@ class Image(models.Model):
         image = cls.objects.get(id=id)
         return image
 
-    @classmethod
-    def todays_posts(cls):
-        today = dt.date.today()
-        post = cls.objects.filter(pub_date__date = today)
-        return post
 
     @classmethod
-    def search_by_name(cls,search_term):
-        post = cls.objects.filter(name__icontains=search_term)
-        return post
+    def search_by_category(cls,search_term):
+        pictures = cls.objects.filter(profile__profile__icontains=search_term)
+        return pictures
