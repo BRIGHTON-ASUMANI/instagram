@@ -20,7 +20,7 @@ class Image(models.Model):
     caption = HTMLField()
     post_date = models.DateTimeField(auto_now_add=True)
     post = models.ImageField(upload_to = 'posts/')
-    profile = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    profile = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
