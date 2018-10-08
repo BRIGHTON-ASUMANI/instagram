@@ -31,18 +31,15 @@ def today_post(request):
     return render(request, 'today.html', {"date": date,"news":news,"SubForm":form})
 
 
-
-# @login_required(login_url='/accounts/login/')
-# def post(request):
-#     current_user = request.user
-#     if request.method == 'POST':
-#         form = Post(request.POST, request.FILES)
-#         if form.is_valid():
-#             post = form.save(commit=False)
-#             post.posted_by = current_user
-#             post.save()
-#         return redirect('NewsToday')
-#
-#     else:
-#         form = NewArticleForm()
-#     return render(request, 'post.html', {})
+@login_required(login_url='/accounts/login/')
+def new_article(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            article = form.save(commit=False)
+            image.profile = current_user
+            image.save()
+    else:
+        form = PostForm()
+    return render(request, 'index.html', {"form": form})

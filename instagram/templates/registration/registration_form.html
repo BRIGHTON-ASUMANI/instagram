@@ -48,34 +48,37 @@ margin-right: -15px;
     </div>
   </div>
 
-    <div class="col-lg-6 landing-right">
+    <div class="col-lg-6 landing-right text-center d-flex align-items-center">
+      <div class='form-login box'>
       {% if form.errors %}
           <p> Some Information Might be Incorrect </p>
         {% endif %}
-        <div class="panel panel-default">
 
-          <div class="panel-heading">
-            <h3 class="text-center">Sign Up</h3>
-          </div>
-          <div class="panel-body">
-
-            <form  action="/accounts/register/" method="post">
+            <h3 class="core-sprite brand-name-img"></h3>
+            <div class="form-group">
+            <form  action="/accounts/login/" method="post" class='form-control' autofocus='true'>
               {% csrf_token %}
               {% bootstrap_form form %}
-              <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
-              </div>
 
-              <input type="hidden" name="next" value="{{next}}">
+                <input type="submit" class="btn btn-primary btn-sm"  value="Login" style="width:100%;">
 
+
+              <input type="hidden" name="next" value="{{next}}" >
+                      <div class="redirect-links box">
+
+                            <p class="light-color">By signing up, you agree to outr Terms &amp; Privacy Policy</p> <a href="/accounts/login/">sign up</a>
+
+                    </div>
+                  </div>
             </form>
 
+              </div>
           </div>
 
         </div>
 
 </div>
-</div>
-</div>
+
+
 
 {% endblock %}
