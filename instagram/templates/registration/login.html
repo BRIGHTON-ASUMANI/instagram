@@ -54,20 +54,20 @@ margin-right: -15px;
           <p> Some Information Might be Incorrect </p>
         {% endif %}
 
-            <h3 class="core-sprite brand-name-img"></h3>
+            <img src="{% static 'images/inst.png'%}" class="img-responsive" style="width:350px;">
             <div class="form-group">
             <form  action="/accounts/login/" method="post" class='form-control' autofocus='true'>
               {% csrf_token %}
               {% bootstrap_form form %}
-
+              <!-- {{ form.as_p }} -->
                 <input type="submit" class="btn btn-primary btn-sm"  value="Login" style="width:100%;">
 
 
               <input type="hidden" name="next" value="{{next}}" >
                       <div class="redirect-links box">
 
-                            Dont have an account please <a href="/accounts/register/">sign up</a>
-
+                            Dont have an account please <a href="/accounts/login/">sign up</a></br>
+                           <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
                     </div>
                   </div>
             </form>

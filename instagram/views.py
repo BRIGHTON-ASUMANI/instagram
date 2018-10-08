@@ -32,7 +32,7 @@ def today_post(request):
 
 
 @login_required(login_url='/accounts/login/')
-def new_article(request):
+def new_post(request):
     current_user = request.user
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)

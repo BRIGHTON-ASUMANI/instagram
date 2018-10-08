@@ -54,10 +54,10 @@ margin-right: -15px;
           <p> Some Information Might be Incorrect </p>
         {% endif %}
             <img src="{% static 'images/inst.png'%}" class="img-responsive" style="width:350px;">
-            <h3 class="core-sprite brand-name-img"></h3>
+            <!-- <h3 class="core-sprite brand-name-img"></h3> -->
 
             <div class="form-group">
-            <form  action="/accounts/login/" method="post" class='form-control' autofocus='true'>
+            <form  action="/accounts/register/" method="post" class='form-control' autofocus='true'>
               {% csrf_token %}
               {% bootstrap_form form %}
 
@@ -69,6 +69,7 @@ margin-right: -15px;
 
                             <p class="light-color">By signing up, you agree to our Terms &amp; </br> Privacy Policy</p> <a href="/accounts/login/">sign up</a>
 
+                     <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
                     </div>
                   </div>
             </form>
