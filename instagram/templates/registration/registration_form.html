@@ -53,10 +53,10 @@ margin-right: -15px;
       {% if form.errors %}
           <p> Some Information Might be Incorrect </p>
         {% endif %}
-
-            <h3 class="core-sprite brand-name-img"></h3>
-            <div class="form-group">
             <img src="{% static 'images/inst.png'%}" class="img-responsive" style="width:350px;">
+            <h3 class="core-sprite brand-name-img"></h3>
+
+            <div class="form-group">
             <form  action="/accounts/login/" method="post" class='form-control' autofocus='true'>
               {% csrf_token %}
               {% bootstrap_form form %}
