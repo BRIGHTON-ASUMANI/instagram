@@ -78,7 +78,7 @@ def change_password(request):
 
 
 def user_profile(request):
-    user = User.objects.get(username=username)
+    # user = User.objects.get(username=username)
     return render(request, 'registration/profile.html',{})
 
 
@@ -93,12 +93,12 @@ def createpost(request):
                 post.save()
 
 
-                return render(request, 'posts/create.html')
+                return render(request, 'registration/create.html')
 
 
 
         else:
-                return render(request,'posts/create.html')
+                return render(request,'registration/create.html')
 
 
 def home(request):
@@ -106,7 +106,7 @@ def home(request):
 
         context={'allposts': allposts }
 
-        return render(request, 'posts/home.html', context)
+        return render(request, 'registration/post.html', context)
 
 
 def detail_post_view(request, id=None):
@@ -116,7 +116,7 @@ def detail_post_view(request, id=None):
 
         context={'eachpost': eachpost}
 
-        return render (request, 'posts/detail.html', context)
+        return render (request, 'registration/detail.html', context)
 
 
 @login_required
@@ -167,7 +167,7 @@ def postpreference(request, postid, userpreference):
                                 context= {'eachpost': eachpost,
                                   'postid': postid}
 
-                                return render (request, 'posts/detail.html', context)
+                                return render (request, 'registration/detail.html', context)
 
                         elif valueobj == userpreference:
                                 obj.delete()
@@ -182,9 +182,7 @@ def postpreference(request, postid, userpreference):
                                 context= {'eachpost': eachpost,
                                   'postid': postid}
 
-                                return render (request, 'posts/detail.html', context)
-
-
+                                return render (request, 'registration/detail.html', context)
 
 
                 except Preference.DoesNotExist:
@@ -211,7 +209,7 @@ def postpreference(request, postid, userpreference):
                         context= {'eachpost': eachpost,
                           'postid': postid}
 
-                        return render (request, 'posts/detail.html', context)
+                        return render (request, 'registration/detail.html', context)
 
 
         else:
@@ -219,4 +217,4 @@ def postpreference(request, postid, userpreference):
                 context= {'eachpost': eachpost,
                           'postid': postid}
 
-                return render (request, 'posts/detail.html', context)
+                return render (request, 'registration/detail.html', context)
