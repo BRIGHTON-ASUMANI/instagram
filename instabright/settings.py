@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from decouple import config
+from django.core.urlresolvers import reverse_lazy
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,6 +77,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -144,3 +146,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 ACCOUNT_ACTIVATION_DAYS = 2 # One-week activation window; you may, of course, use a different value.
+
+
+
+LOGIN_REDIRECT_URL=reverse_lazy('index')
+LOGIN_URL=reverse_lazy('login')
+LOGOUT_URL=reverse_lazy('logout')

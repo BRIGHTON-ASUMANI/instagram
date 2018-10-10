@@ -50,29 +50,34 @@ margin-right: -15px;
 
     <div class="col-lg-6 landing-right text-center d-flex align-items-center">
       <div class='form-login box'>
-      {% if form.errors %}
-          <p> Some Information Might be Incorrect </p>
-        {% endif %}
+
             <img src="{% static 'images/inst.png'%}" class="img-responsive" style="width:350px;">
             <!-- <h3 class="core-sprite brand-name-img"></h3> -->
 
             <div class="form-group">
-            <form  action="/accounts/register/" method="post" class='form-control' autofocus='true'>
-              {% csrf_token %}
-              {% bootstrap_form form %}
+              <form method='POST'>
+  {% csrf_token %}
 
-                <input type="submit" class="btn btn-primary btn-sm"  value="Login" style="width:100%;">
+  {% if form.errors %}
+  <div class='alert alert-warning alert-dismissable' role='alert'>
+  <button class="close" data-dismiss='alert'>
+  <small><sup>x</sup></small>
+  </button>
 
+  {% for field in form %}
+    {% if field.errors %}
+      {{ field.errors }}
+    {% endif %}
+  {% endfor %}
 
-              <input type="hidden" name="next" value="{{next}}" >
-                      <div class="redirect-links box">
+  </div>
+  {% endif %}
 
-                            <p class="light-color">By signing up, you agree to our Terms &amp; </br> Privacy Policy</p> <a href="/accounts/login/">sign up</a>
+  {{ form.as_p }}
+  <input type="submit" value='Register' class="btn btn-secondary">
+  <p class="light-color">Already have an account? Please <a href="{% url 'login' %}">Login</a>
+  </form>
 
-                     <a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
-                    </div>
-                  </div>
-            </form>
 
               </div>
           </div>

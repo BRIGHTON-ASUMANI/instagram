@@ -1,59 +1,77 @@
-from django.http import HttpResponse, Http404,HttpResponseRedirect
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
-from .forms import SubForm
-from .models import Image, Profile
-import datetime as dt
-from .email import send_welcome_email
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
+from django.contrib import messages
+from .forms import SignUpForm, EditProfileForm
 
 # Create your views here.
-@login_required(login_url='/accounts/login/')
-def index(request):
-    image=Image.all_posts()
-    date = dt.date.today
+def home(request):
+    return render(request, 'registration/home.html', {} )
 
-    return render(request, 'index.html',{'date': date, 'image': image})
-
-
-@login_required(login_url='/accounts/login/')
-def search_results(request):
-
-    if 'image' in request.GET and request.GET["image"]:
-        search_term = request.GET.get("image")
-        searched_profile = Image.search_by_profile(search_term)
-        message = f"{search_term}"
-
-        return render(request, 'registration/search.html',{"message":message,"profile": searched_posts})
-
-    else:
-        message = "You haven't searched for any term"
-        return render(request, 'search.html',{"message":message})
-
-@login_required(login_url='/accounts/login/')
-def today_post(request):
+def login_user(request):
     if request.method == 'POST':
-        form = SubForm(request.POST)
-        if form.is_valid():
-            name = form.cleaned_data['your_name']
-            email = form.cleaned_data['email']
-            recipient = Subscribers(name = name,email =email)
-            recipient.save()
-            send_welcome_email(name,email)
-            HttpResponseRedirect('today_post')
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            messages.success(request, ('You have been logged in' ))
+            return redirect('profile')
+        else:
+            messages.success(request, ('error logging in - please try again' ))
+            return redirect('login')
     else:
-        form = SubForm()
-    return render(request, 'today.html', {"date": date,"news":news,"SubForm":form})
+        return render(request, 'registration/login.html', {} )
 
+def logout_user(request):
+    logout(request)
+    messages.success(request, ('You have been logged out' ))
+    return redirect('home')
 
-@login_required(login_url='/accounts/login/')
-def new_post(request):
-    current_user = request.user
+def register_user(request):
     if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
+        form = SignUpForm(request.POST)
         if form.is_valid():
-            article = form.save(commit=False)
-            image.profile = current_user
-            image.save()
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(request, username=username, password=password)
+            login(request, user)
+            messages.success(request, ('You have been registered' ))
+            return redirect('profile')
+
     else:
-        form = PostForm()
-    return render(request, 'index.html', {"form": form})
+        form = SignUpForm()
+    context = {'form': form }
+    return render(request, 'registration/register.html',context)
+
+def edit_profile(request):
+    if request.method == 'POST':
+        form = EditProfileForm(data=request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, ('You have editted your profile' ))
+            return redirect('home')
+
+    else:
+        form = EditProfileForm(instance=request.user)
+    context = {'form': form }
+    return render(request, 'registration/edit_profile.html',context)
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            messages.success(request, ('You have password has been changed' ))
+            return redirect('home')
+
+    else:
+        form = PasswordChangeForm(user=request.user)
+    context = {'form': form }
+    return render(request, 'registration/change_password.html',context)
+
+
+def user_profile(request):
+    return render(request, 'registration/profile.html',{})

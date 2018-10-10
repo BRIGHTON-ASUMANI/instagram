@@ -1,3 +1,7 @@
+{% extends "registration/base.html" %}
+{% load bootstrap4 %}
+{% load static %}
+{% block content %}
 <header>
 
 	<div class="container">
@@ -14,7 +18,7 @@
 
 				<h1 class="profile-user-name">janedoe_</h1>
 
-				<button class="btn profile-edit-btn">Edit Profile</button>
+				<button class="btn profile-edit-btn" action='{% url 'edit_profile' %}'>Edit Profile</button>
 
 				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
 
@@ -275,3 +279,5 @@
 	<!-- End of container -->
 
 </main>
+
+{% endblock %}

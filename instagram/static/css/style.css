@@ -510,3 +510,15 @@ Remove or comment-out the code block below to see how the browser will fall-back
         }
     }
 }
+
+.card-header {
+    background-color: white;
+  }
+
+  .actions {
+      margin: 12px 0;
+    }
+
+    .card-body {
+      padding: 5px 16px 5px;
+    }
