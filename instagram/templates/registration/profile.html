@@ -1,7 +1,19 @@
 {% extends "registration/base.html" %}
 {% load bootstrap4 %}
 {% load static %}
+
 {% block content %}
+
+
+
+  {% if user.is_authenticated %}
+<!-- <p>Name: {{ user.first_name }}  {{user.last_name}}</p>
+<p>Username:  {{ user.username}}</p>
+<!- <p>Password: {{ user.password}}</p> -->
+<!-- <p>Email: {{ user.email}}</p> -->
+<!-- <p>Fav_color: {{ user.fav_color}}</p> -->
+
+
 <header>
 
 	<div class="container">
@@ -10,15 +22,15 @@
 
 			<div class="profile-image">
 
-				<img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt="">
+				<img src="user.Profile.profile.url" alt="">
 
 			</div>
 
 			<div class="profile-user-settings">
 
-				<h1 class="profile-user-name">janedoe_</h1>
+				<h1 class="profile-user-name">{{ user.username}}</h1>
 
-				<button class="btn profile-edit-btn" action='{% url 'edit_profile' %}'>Edit Profile</button>
+				<a href="{% url 'edit_profile' %}"><button class="btn profile-edit-btn">Edit Profile</button></a>
 
 				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
 
@@ -279,5 +291,7 @@
 	<!-- End of container -->
 
 </main>
+
+{% endif %}
 
 {% endblock %}

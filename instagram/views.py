@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib import messages
 from .forms import SignUpForm, EditProfileForm
+from django.contrib.auth.models import User
 
 # Create your views here.
 def home(request):
@@ -26,7 +27,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request, ('You have been logged out' ))
-    return redirect('home')
+    return redirect('login')
 
 def register_user(request):
     if request.method == 'POST':
@@ -45,6 +46,7 @@ def register_user(request):
     context = {'form': form }
     return render(request, 'registration/register.html',context)
 
+@log
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(data=request.POST, instance=request.user)
@@ -74,4 +76,5 @@ def change_password(request):
 
 
 def user_profile(request):
+    user = User.objects.get(username=username)
     return render(request, 'registration/profile.html',{})
