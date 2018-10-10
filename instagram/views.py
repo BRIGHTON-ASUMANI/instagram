@@ -1,6 +1,7 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignUpForm, EditProfileForm
 from django.contrib.auth.models import User
@@ -46,7 +47,7 @@ def register_user(request):
     context = {'form': form }
     return render(request, 'registration/register.html',context)
 
-@log
+@login_required
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(data=request.POST, instance=request.user)
