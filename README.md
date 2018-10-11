@@ -1,5 +1,5 @@
 # __GB-INSTAGRAM__
-[GB-instagram](www.gbinstagram.herokuapp.com)
+[Insta-bryam](www.gbinstagram.herokuapp.com)
  is an application that allows users to post their photos and other people with different profiles are able to comment on the picture and even like them.
 
 ### __prerequisites__
