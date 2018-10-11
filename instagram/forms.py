@@ -72,7 +72,5 @@ class PostForm(forms.ModelForm):
             # 'tags': forms.CheckboxSelectMultiple(),
         }
 
-class ImageForm(forms.ModelForm):
-    class Meta:
-        model = Image
-        exclude = ['user']
+class CommentForm(forms.Form):
+    content = forms.CharField(label='First Name',max_length=300)

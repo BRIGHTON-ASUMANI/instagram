@@ -1,20 +1,29 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, Http404,HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import SignUpForm, EditProfileForm, PostForm, ImageForm
+from .forms import SignUpForm, EditProfileForm, PostForm, CommentForm
 from django.contrib.auth.models import User
-from .models import Image
+from .models import Image, Comments
 import datetime as dt
 
 # Create your views here.
-@login_required()
+
 def home(request):
     image=Image.all_images()
-    comments = Comment.get_comments()
     date = dt.date.today
-    return render(request, 'registration/home.html',{'date': date, 'image': image})
+    # if request.method == 'POST':
+    #     form = CommentForm(request.POST)
+    #     if form.is_valid():
+    #         content = form.cleaned_data['content']
+    #         recepient  = Comments(content=content)
+    #         recepient.save()
+    #         HttpResponseRedirect('home')
+    # else:
+    #     form = CommentForm()
+    return render(request, 'home.html',{'date': date, 'image': image})
 
 def login_user(request):
     if request.method == 'POST':
@@ -29,7 +38,7 @@ def login_user(request):
             messages.success(request, ('error logging in - please try again' ))
             return redirect('login')
     else:
-        return render(request, 'registration/login.html', {} )
+        return render(request, 'login.html', {} )
 
 def logout_user(request):
     logout(request)
@@ -51,9 +60,9 @@ def register_user(request):
     else:
         form = SignUpForm()
     context = {'form': form }
-    return render(request, 'registration/register.html',context)
+    return render(request, 'register.html',context)
 
-@login_required
+
 def edit_profile(request):
     if request.method == 'POST':
         form = EditProfileForm(data=request.POST, instance=request.user)
@@ -65,7 +74,7 @@ def edit_profile(request):
     else:
         form = EditProfileForm(instance=request.user)
     context = {'form': form }
-    return render(request, 'registration/edit_profile.html',context)
+    return render(request, 'edit_profile.html',context)
 
 def change_password(request):
     if request.method == 'POST':
@@ -79,14 +88,14 @@ def change_password(request):
     else:
         form = PasswordChangeForm(user=request.user)
     context = {'form': form }
-    return render(request, 'registration/change_password.html',context)
+    return render(request, 'change_password.html',context)
 
 @login_required
 def profile(request):
     # image=Image.all_images()
     date = dt.date.today
     profiles = Profile.objects.filter(id = profile_id)
-    return render(request, 'registration/profile.html',{'date': date, 'image': image})
+    return render(request, 'profile.html',{'date': date, 'image': image})
 
 
 
@@ -102,11 +111,4 @@ def new_post(request):
 
     else:
         form = PostForm()
-    return render(request, 'registration/home.html', {"form": form})
-
-
-
-def explore(request):
-    date = dt.date.today()
-    profiles = Profile.get_profiles()
-    return render(request, 'explore.html', {"date": date, "profiles": profiles})
+    return render(request, 'home.html', {"form": form})

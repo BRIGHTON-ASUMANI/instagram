@@ -15,5 +15,6 @@ urlpatterns=[
     url('change_password/',views.change_password, name='change_password'),
     url('post/', views.new_post, name='new_post')
 ]
+
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

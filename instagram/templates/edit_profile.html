@@ -1,8 +1,8 @@
-{% extends 'registration/base.html'%}
+{% extends 'base.html'%}
 {% block content %}
-<h3 class="text-center">Change Password</h3>
+<h3 class="text-center">Edit Profile</h3>
 <div class="col-md-6 offset-md-3">
-<form method='POST' action="{% url 'change_password' %}">
+<form method='POST'>
 {% csrf_token %}
 
 {% if form.errors %}
@@ -21,7 +21,9 @@
 {% endif %}
 
 {{ form.as_p }}
-<input type="submit" value='Save' class="btn btn-secondary">
+
+  <p><small><a href="{% url 'change_password' %}">click here</a> To change your Password</small></p>
+<input type="submit" value='Edit' class="btn btn-secondary">
 </form>
 </div>
 {% endblock %}

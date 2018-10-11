@@ -145,10 +145,6 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
-ACCOUNT_ACTIVATION_DAYS = 2 # One-week activation window; you may, of course, use a different value.
-
-
-
-LOGIN_REDIRECT_URL=reverse_lazy('index')
-LOGIN_URL=reverse_lazy('login')
-LOGOUT_URL=reverse_lazy('logout')
+# LOGIN_REDIRECT_URL=reverse_lazy('index')
+# LOGIN_URL=reverse_lazy('login')
+# LOGOUT_URL=reverse_lazy('logout')
