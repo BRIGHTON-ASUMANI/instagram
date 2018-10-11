@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Image
 
 class EditProfileForm(UserCreationForm):
     password1 = forms.CharField(label='', widget = forms.TextInput(attrs={'type':'hidden'}))
@@ -61,3 +62,17 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].widget.attrs['placeholder'] = 'confirm password'
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = ""
+
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        exclude = ['profile',]
+        widgets = {
+            # 'tags': forms.CheckboxSelectMultiple(),
+        }
+
+class ImageForm(forms.ModelForm):
+    class Meta:
+        model = Image
+        exclude = ['user']
