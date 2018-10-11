@@ -14,15 +14,15 @@ import datetime as dt
 def home(request):
     image=Image.all_images()
     date = dt.date.today
-    # if request.method == 'POST':
-    #     form = CommentForm(request.POST)
-    #     if form.is_valid():
-    #         content = form.cleaned_data['content']
-    #         recepient  = Comments(content=content)
-    #         recepient.save()
-    #         HttpResponseRedirect('home')
-    # else:
-    #     form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            content = form.cleaned_data['content']
+            recepient  = Comments(content=content)
+            recepient.save()
+            HttpResponseRedirect('home')
+    else:
+        form = CommentForm()
     return render(request, 'home.html',{'date': date, 'image': image})
 
 def login_user(request):
