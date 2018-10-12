@@ -522,3 +522,7 @@ Remove or comment-out the code block below to see how the browser will fall-back
     .card-body {
       padding: 5px 16px 5px;
     }
+
+.comment {
+    margin: 20px 0px 20px 20px;
+}

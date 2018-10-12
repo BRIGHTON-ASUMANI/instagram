@@ -4,9 +4,25 @@
 
 {% block content %}
 
-
-
   {% if user.is_authenticated %}
+
+
+{% for prof in profiles %}
+
+                    <h3>@{{prof.user}}</h3>
+
+                    <p>{{prof.bio}}</p>
+
+
+</div>
+{% empty %}
+<div class="row">
+<h2 class="text-center"> No Profile</h2>
+</div>
+{% endfor %}
+</div>
+
+
 <!-- <p>Name: {{ user.first_name }}  {{user.last_name}}</p>
 <p>Username:  {{ user.username}}</p>
 <!- <p>Password: {{ user.password}}</p> -->

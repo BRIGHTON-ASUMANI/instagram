@@ -6,25 +6,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .forms import SignUpForm, EditProfileForm, PostForm, CommentForm
 from django.contrib.auth.models import User
-from .models import Image, Comments
+from .models import Image, Comment, Profile
 import datetime as dt
 
 # Create your views here.
-
-def home(request):
-    image=Image.all_images()
-    date = dt.date.today
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            content = form.cleaned_data['content']
-            recepient  = Comments(content=content)
-            recepient.save()
-            HttpResponseRedirect('home')
-    else:
-        form = CommentForm()
-    return render(request, 'home.html',{'date': date, 'image': image})
-
 def login_user(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -44,6 +29,41 @@ def logout_user(request):
     logout(request)
     messages.success(request, ('You have been logged out' ))
     return redirect('login')
+
+
+def home(request):
+    profile = Profile.get_all()
+    image=Image.all_images()
+    date = dt.date.today
+    comments = Comment.all_comments()
+    current_user = request.user
+    # comment = Comment.get_commented()
+    context = {"image":image,'date': date,'comments': comment,"current_user":current_user}
+    # if request.method == 'POST':
+    #     form = CommentForm(request.POST)
+    #     if form.is_valid():
+    #         content = form.cleaned_data['content']
+    #         recepient  = Comment(content=content)
+    #         recepient.save()
+    #         HttpResponseRedirect('home')
+    # else:
+    #     form = CommentForm()
+
+    return render(request, 'home.html',context)
+
+
+def comment(request):
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return redirect('home')
+    else:
+        form = CommentForm()
+    return render(request, 'home.html', {'form': form})
+
 
 def register_user(request):
     if request.method == 'POST':
@@ -91,11 +111,11 @@ def change_password(request):
     return render(request, 'change_password.html',context)
 
 @login_required
-def profile(request):
+def user_profile(request):
     # image=Image.all_images()
-    date = dt.date.today
+
     profiles = Profile.objects.filter(id = profile_id)
-    return render(request, 'profile.html',{'date': date, 'image': image})
+    return render(request, 'profile.html', locals())
 
 
 

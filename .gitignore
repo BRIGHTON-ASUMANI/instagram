@@ -6,6 +6,10 @@ __pycache__/
 # C extensions
 *.so
 
+virtual/
+*pyc
+
+
 # Distribution / packaging
 .Python
 build/
@@ -99,6 +103,7 @@ venv.bak/
 
 # mkdocs documentation
 /site
+
 
 # mypy
 .mypy_cache/

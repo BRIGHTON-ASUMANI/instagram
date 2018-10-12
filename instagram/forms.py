@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Image
+from .models import Image, Comment
 
 class EditProfileForm(UserCreationForm):
     password1 = forms.CharField(label='', widget = forms.TextInput(attrs={'type':'hidden'}))
@@ -72,5 +72,8 @@ class PostForm(forms.ModelForm):
             # 'tags': forms.CheckboxSelectMultiple(),
         }
 
-class CommentForm(forms.Form):
-    content = forms.CharField(label='First Name',max_length=300)
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = Comment
+        fields = ('post', 'text',)
