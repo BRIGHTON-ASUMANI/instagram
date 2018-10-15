@@ -7,22 +7,6 @@
   {% if user.is_authenticated %}
 
 
-{% for prof in profiles %}
-
-                    <h3>@{{prof.user}}</h3>
-
-                    <p>{{prof.bio}}</p>
-
-
-</div>
-{% empty %}
-<div class="row">
-<h2 class="text-center"> No Profile</h2>
-</div>
-{% endfor %}
-</div>
-
-
 <!-- <p>Name: {{ user.first_name }}  {{user.last_name}}</p>
 <p>Username:  {{ user.username}}</p>
 <!- <p>Password: {{ user.password}}</p> -->
@@ -55,9 +39,9 @@
 			<div class="profile-stats">
 
 				<ul>
-					<li><span class="profile-stat-count">164</span> posts</li>
-					<li><span class="profile-stat-count">188</span> followers</li>
-					<li><span class="profile-stat-count">206</span> following</li>
+					<li><span class="profile-stat-count">2</span> posts</li>
+					<li><span class="profile-stat-count">0</span> followers</li>
+					<li><span class="profile-stat-count">0</span> following</li>
 				</ul>
 
 			</div>

@@ -526,3 +526,10 @@ Remove or comment-out the code block below to see how the browser will fall-back
 .comment {
     margin: 20px 0px 20px 20px;
 }
+
+div > img {
+  width: auto;
+  height : auto;
+  max-height: 100%;
+  max-width: 100%;
+}

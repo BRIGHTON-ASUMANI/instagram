@@ -64,16 +64,13 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].help_text = ""
 
 
-class PostForm(forms.ModelForm):
+class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
-        exclude = ['profile',]
-        widgets = {
-            # 'tags': forms.CheckboxSelectMultiple(),
-        }
+        exclude = ['user','image_name']
 
 class CommentForm(forms.ModelForm):
 
     class Meta:
         model = Comment
-        fields = ('post', 'text',)
+        fields = ( 'text',)

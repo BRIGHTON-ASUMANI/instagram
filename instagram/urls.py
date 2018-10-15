@@ -13,8 +13,8 @@ urlpatterns=[
     url('profile/',views.user_profile, name='profile'),
     url('edit_profile/',views.edit_profile, name='edit_profile'),
     url('change_password/',views.change_password, name='change_password'),
-    url(r'^post/$', views.new_post, name='new_post'),
-
+    url(r'^post/$', views.new_image, name='new_image'),
+    url(r'^comments/(\d+)', views.comment, name='comments'),
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
