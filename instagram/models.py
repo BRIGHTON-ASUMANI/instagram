@@ -101,8 +101,8 @@ class Follower(models.Model):
 
 class Likes(models.Model):
     likes = models.IntegerField()
-    image = models.ForeignKey(Image, related_name='likes_for', on_delete=models.CASCADE, null=True)
-    user = models.ForeignKey(User, related_name='who_is_liking', on_delete=models.CASCADE, null=True)
+    image = models.ForeignKey(Image, related_name='likes', on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, related_name='dislikes', on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):
