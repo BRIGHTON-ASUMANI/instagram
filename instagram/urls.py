@@ -14,10 +14,10 @@ urlpatterns=[
     url('edit_profile/',views.edit_profile, name='edit_profile'),
     url('change_password/',views.change_password, name='change_password'),
     url(r'^post/$', views.new_image, name='new_image'),
-    url('edit/',views.edit, name='edit'),
-    url( r'pro/(?P<pk>[0-9]+)/$' , views.lump, name='lump' ),
     url(r'^comments/(\d+)', views.comment, name='comments'),
     url( r'^newprofile/$' , views.newprofile , name='newprofile' ),#newprofile is the same as createprofile
+    url( r'pro/(?P<pk>[0-9]+)/$' , views.lump, name='lump' ),
+
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
