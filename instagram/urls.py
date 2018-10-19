@@ -17,6 +17,11 @@ urlpatterns=[
     url(r'^comments/(\d+)', views.comment, name='comments'),
     url( r'^newprofile/$' , views.newprofile , name='newprofile' ),#newprofile is the same as createprofile
     url( r'pro/(?P<pk>[0-9]+)/$' , views.lump, name='lump' ),
+    url( r'image/(?P<pk>[0-9]+)/$' , views.AlbumUpdate.as_view( ) , name='album-update' ) ,
+    url( r'prof/(?P<pk>[0-9]+)/$' , views.ProfileUpdate.as_view( ) , name='profile-update' ) ,
+    url( r'image/(?P<pk>[0-9]+)/delete/$' , views.AlbumDelete.as_view( ) , name='album-delete' ) ,
+    url( r'profile/(?P<pk>[0-9]+)/delete/$' , views.ProfileDelete.as_view( ) , name='profile-delete' ) ,
+
 
 ]
 if settings.DEBUG:
