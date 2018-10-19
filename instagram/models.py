@@ -5,12 +5,15 @@ import datetime as dt
 from pyuploadcare.dj.models import ImageField
 from django.db.models.signals import post_save
 from django.utils import timezone
-
+from django.core.urlresolvers import reverse
 
 class Profile(models.Model):
+    user= models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
     prof_pic = ImageField()
     bio = models.TextField()
-    user= models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+
+    def get_absolute_url(self):
+        return reverse('dump', kwargs={'pk':self.pk})
 
 
     def __str__(self):
@@ -45,6 +48,8 @@ class Image(models.Model):
     def __str__(self):
         return self.image_name
 
+    def get_absolute_url(self):
+        return reverse('profile', kwargs={'pk':self.pk})
 
     @classmethod
     def all_images(cls):
