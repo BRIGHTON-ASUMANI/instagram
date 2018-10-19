@@ -153,18 +153,18 @@ def lump(request,pk):
 
 
 class AlbumUpdate(UpdateView):
-   model=Project
+   model=Image
    template_name = 'edit-image.html'
-   fields = ['title','link','landing_page','description',]
+   fields = ['image','image_name','image_caption']
 
 class ProfileUpdate(UpdateView):
    model= Profile
    template_name = 'edit.html'
-   fields = ['contact','bio','picture',]
+   fields = ['prof_pic','bio']
 
 
 class AlbumDelete(DeleteView):
-   model=Project
+   model=Image
    success_url = reverse_lazy('home')
 
 class ProfileDelete(DeleteView):
