@@ -144,16 +144,23 @@ def edit_profile(request):
 
     return render(request, 'edit_profile.html',context)
 #
-# @login_required( login_url='/accounts/login/' )
-def edit(request):
-  current_user=request.user
-  if request.method == 'POST':
-    form=ProfileForm( request.POST , request.FILES )
-    if form.is_valid( ):
-      update=form.save( commit=False )
-      update.user=current_user
-      update.save( )
-      return redirect( 'profile' )
-  else:
-    form=ProfileForm( )
-  return render( request , 'edit.html' , {"form": form} )
+# # @login_required( login_url='/accounts/login/' )
+# def edit(request):
+#   current_user=request.user
+#   if request.method == 'POST':
+#     form=ProfileForm( request.POST , request.FILES )
+#     if form.is_valid( ):
+#       update=form.save( commit=False )
+#       update.user=current_user
+#       update.save( )
+#       return redirect( 'profile' )
+#   else:
+#     form=ProfileForm( )
+#   return render( request , 'edit.html' , {"form": form} )
+
+@login_required(login_url='/login')
+def lump(request,pk):
+    profile =Profile.objects.filter(user=request.user.id)
+    project =Project.objects.filter(user=request.user.id)
+    commented = CommentForm()
+    return render(request,'lump.html',{"profile": profile, "project": project})
