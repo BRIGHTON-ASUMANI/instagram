@@ -39,13 +39,11 @@ def logout_user(request):
 
 def home(request):
     profile = Profile.get_all()
-    image=Image.all_images()
-    date = dt.date.today
-    # comments = Comment.all_comments()
+    image=Image.objects.filter()
     current_user = request.user
-
     commented = CommentForm()
-    context = {"image":image,'date': date,"current_user":current_user,"profile":profile, 'commented':commented}
+    #comments = Comment.all_comments()
+    context = {"image":image,"current_user":current_user,"profile":profile, 'commented':commented}
 
     return render(request, 'home.html',context)
 
@@ -80,20 +78,6 @@ def register_user(request):
     context = {'form': form }
     return render(request, 'register.html',context)
 
-
-# def edit_profile(request):
-#     if request.method == 'POST':
-#         form = EditProfileForm(data=request.POST, instance=request.user)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, ('You have editted your profile' ))
-#             return redirect('home')
-#
-#     else:
-#         form = EditProfileForm(instance=request.user)
-#     context = {'form': form }
-#     return render(request, 'edit_profile.html',context)
-
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(data=request.POST, user=request.user)
@@ -108,15 +92,12 @@ def change_password(request):
     context = {'form': form }
     return render(request, 'change_password.html', context)
 
-@login_required
-def user_profile(request):
-        profile = Profile.get_all()
-        image=Image.all_images()
-        date = dt.date.today
-        # comments = Comment.all_comments()
-        current_user = request.user
-        context = {"image":image,'profile': profile, "current_user":current_user}
-        return render(request, 'profile.html', context)
+@login_required(login_url='/login')
+def profile(request):
+    profile =Profile.objects.filter(user=request.user.id)
+    image =Image.objects.filter(user=request.user.id)
+    commented = CommentForm()
+    return render(request, 'profile.html', {"profile": profile, "image": image})
 
 
 
