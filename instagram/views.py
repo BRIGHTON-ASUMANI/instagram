@@ -154,7 +154,7 @@ def lump(request,pk):
 
 class AlbumUpdate(UpdateView):
    model=Project
-   template_name = 'edit-project.html'
+   template_name = 'edit-image.html'
    fields = ['title','link','landing_page','description',]
 
 class ProfileUpdate(UpdateView):
