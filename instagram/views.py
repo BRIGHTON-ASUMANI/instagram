@@ -131,7 +131,7 @@ def new_image(request):
 def edit_profile(request):
     current_user = request.user
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=request.user, data=request.FILES)
+        form = EditProfileForm(request.POST, instance=request.user, data=request.FILES)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = current_user
