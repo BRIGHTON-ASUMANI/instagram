@@ -16,6 +16,7 @@ urlpatterns=[
     url(r'^post/$', views.new_image, name='new_image'),
     url('edit/',views.edit, name='edit'),
     url(r'^comments/(\d+)', views.comment, name='comments'),
+    url( r'^newprofile/$' , views.newprofile , name='newprofile' ),#newprofile is the same as createprofile
 ]
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
