@@ -161,6 +161,6 @@ def edit_profile(request):
 @login_required(login_url='/login')
 def lump(request,pk):
     profile =Profile.objects.filter(user=request.user.id)
-    project =Project.objects.filter(user=request.user.id)
+    image =Image.objects.filter(user=request.user.id)
     commented = CommentForm()
-    return render(request,'lump.html',{"profile": profile, "project": project})
+    return render(request,'lump.html',{"profile": profile, "image": image})
