@@ -8,7 +8,7 @@ from django.utils import timezone
 
 
 class Profile(models.Model):
-    prof_pic = models.ImageField()
+    prof_pic = ImageField()
     bio = models.TextField()
     user= models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
 
@@ -37,7 +37,7 @@ class Profile(models.Model):
 
 class Image(models.Model):
     user = models.ForeignKey(User, related_name="editor", on_delete=models.CASCADE)
-    image = models.ImageField()
+    image = ImageField()
     image_name = models.CharField(max_length =30)
     image_caption = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
