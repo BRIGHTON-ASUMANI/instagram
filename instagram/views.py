@@ -9,6 +9,11 @@ from django.contrib.auth.models import User
 from .models import Image, Comment, Profile
 import datetime as dt
 from .email import send_welcome_email
+from django.views import generic
+from django.views.generic.edit import UpdateView,DeleteView
+from django.core.urlresolvers import reverse_lazy
+from django.views.generic import View
+
 
 # Create your views here.
 def login_user(request):
