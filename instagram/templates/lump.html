@@ -44,28 +44,28 @@
         </div>
                  </div>
                </div>
-               Delete Album -->
-                                  <form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
-                                      {% csrf_token %}
-                                      <input type="hidden" name="image_id" value="{{ prof.id }}" />
-                                      <button type="submit" class="btn btn-default btn-lg">
-                                          <span class="glyphicon glyphicon-trash"></span>
-                                      </button>
-                                  </form>
-                                  <!--edit-album-->
-                                                       <form action="{% url 'profile-update' prof.id %}" method="post" style="display: inline;">
-                                                           {% csrf_token %}
-                                                           <input type="hidden" name="image_id" value="{{ prof.id }}" />
-                                                           <button type="submit" class="btn btn-default btn-lg">
-                                                               <span class="glyphicon glyphicon-edit"></span>
-                                                           </button>
-                                                       </form>
+<!--Delete Album -->
+  <form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
+      {% csrf_token %}
+      <input type="hidden" name="image_id" value="{{ prof.id }}" />
+      <button type="submit" class="btn btn-default btn-lg">
+          <span class="glyphicon glyphicon-trash"></span>
+      </button>
+  </form>
+  <!--edit-album-->
+ <form action="{% url 'profile-update' prof.id %}" method="post" style="display: inline;">
+               {% csrf_token %}
+               <input type="hidden" name="image_id" value="{{ prof.id }}" />
+               <button type="submit" class="btn btn-default btn-lg">
+                   <span class="glyphicon glyphicon-edit"></span>
+               </button>
+           </form>
 
-             <div class="col-md-5 col-sm-6">
-                <div class="me-image">
-                  <img  src='{{prof.picture.cdn_url}}' class='img-responsive'>
-              </div>
-            </div>
+<div class="col-md-5 col-sm-6">
+<div class="me-image">
+<img  src='{{prof.picture.cdn_url}}' class='img-responsive'>
+</div>
+</div>
           </div>
         </div>
     </section>
