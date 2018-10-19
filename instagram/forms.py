@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Image, Comment
+from .models import Image, Comment, Profile
 
 class EditProfileForm(UserCreationForm):
     password1 = forms.CharField(label='', widget = forms.TextInput(attrs={'type':'hidden'}))
@@ -74,3 +74,9 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ( 'text',)
+
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        exclude = ['user']

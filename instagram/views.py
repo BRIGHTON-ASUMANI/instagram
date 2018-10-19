@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .forms import SignUpForm, EditProfileForm, ImageForm, CommentForm
+from .forms import SignUpForm, EditProfileForm, ImageForm, CommentForm, ProfileForm
 from django.contrib.auth.models import User
 from .models import Image, Comment, Profile
 import datetime as dt
@@ -40,11 +40,11 @@ def home(request):
     current_user = request.user
 
     commented = CommentForm()
-    context = {"image":image,'date': date,"current_user":current_user, 'commented':commented}
+    context = {"image":image,'date': date,"current_user":current_user,"profile":profile, 'commented':commented}
 
     return render(request, 'home.html',context)
 
-@login_required(login_url='/accounts/login')
+@login_required(login_url='/login')
 def comment(request,id):
     upload = Image.objects.get(id=id)
     if request.method == 'POST':
@@ -76,18 +76,18 @@ def register_user(request):
     return render(request, 'register.html',context)
 
 
-def edit_profile(request):
-    if request.method == 'POST':
-        form = EditProfileForm(data=request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            messages.success(request, ('You have editted your profile' ))
-            return redirect('home')
-
-    else:
-        form = EditProfileForm(instance=request.user)
-    context = {'form': form }
-    return render(request, 'edit_profile.html',context)
+# def edit_profile(request):
+#     if request.method == 'POST':
+#         form = EditProfileForm(data=request.POST, instance=request.user)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, ('You have editted your profile' ))
+#             return redirect('home')
+#
+#     else:
+#         form = EditProfileForm(instance=request.user)
+#     context = {'form': form }
+#     return render(request, 'edit_profile.html',context)
 
 def change_password(request):
     if request.method == 'POST':
@@ -101,13 +101,17 @@ def change_password(request):
     else:
         form = PasswordChangeForm(user=request.user)
     context = {'form': form }
-    return render(request, 'change_password.html',context)
+    return render(request, 'change_password.html', context)
 
 @login_required
 def user_profile(request):
-
-
-    return render(request, 'profile.html', locals())
+        profile = Profile.get_all()
+        image=Image.all_images()
+        date = dt.date.today
+        # comments = Comment.all_comments()
+        current_user = request.user
+        context = {"image":image,'profile': profile, "current_user":current_user}
+        return render(request, 'profile.html', context)
 
 
 
@@ -124,3 +128,33 @@ def new_image(request):
     else:
         form = ImageForm()
     return render(request, 'image.html', {"form": form})
+
+def edit_profile(request):
+    current_user = request.user
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=request.user, data=request.FILES)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = current_user
+            profile.save()
+            messages.success(request, ('You have editted your profile' ))
+            return redirect('home')
+
+    else:
+        form = EditProfileForm(instance=request.user)
+
+    return render(request, 'edit_profile.html',context)
+#
+# @login_required( login_url='/accounts/login/' )
+def edit(request):
+  current_user=request.user
+  if request.method == 'POST':
+    form=ProfileForm( request.POST , request.FILES )
+    if form.is_valid( ):
+      update=form.save( commit=False )
+      update.user=current_user
+      update.save( )
+      return redirect( 'profile' )
+  else:
+    form=ProfileForm( )
+  return render( request , 'edit.html' , {"form": form} )

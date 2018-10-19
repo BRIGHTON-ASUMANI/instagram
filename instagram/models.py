@@ -8,7 +8,7 @@ from django.utils import timezone
 
 
 class Profile(models.Model):
-    prof_pic = models.ImageField(upload_to='profile/',blank=True)
+    prof_pic = models.ImageField()
     bio = models.TextField()
     user= models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
 
@@ -58,7 +58,7 @@ class Image(models.Model):
 
     @classmethod
     def update_caption(cls,default,update):
-        fetched = Profile.objects.filter(name=default).update(name=update)
+        fetched = Image.objects.filter(name=default).update(name=update)
         return fetched
 
     @classmethod
