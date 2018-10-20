@@ -151,6 +151,20 @@ def lump(request,pk):
     commented = CommentForm()
     return render(request,'lump.html',{"profile": profile, "image": image})
 
+@login_required( login_url='/login' )
+def create(request):
+    current_user=request.user
+    if request.method == 'POST':
+        form=ProfileForm( request.POST , request.FILES )
+        if form.is_valid( ):
+            update=form.save( commit=False )
+            update.user=current_user
+            update.save( )
+            return redirect( 'profile' )
+    else:
+        form=ProfileForm( )
+    return render( request , 'create.html' , {"form": form} )
+
 
 class AlbumUpdate(UpdateView):
    model=Image
