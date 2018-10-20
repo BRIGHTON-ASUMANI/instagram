@@ -44,26 +44,26 @@
         </div>
                  </div>
                </div>
-               Delete Album -->
-                                  <form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
-                                      {% csrf_token %}
-                                      <input type="hidden" name="image_id" value="{{ prof.id }}" />
-                                      <button type="submit" class="btn btn-default btn-lg">
-                                          <span class="glyphicon glyphicon-trash"></span>
-                                      </button>
-                                  </form>
-                                  <!--edit-album-->
-                                                       <form action="{% url 'profile-update' prof.id %}" method="post" style="display: inline;">
-                                                           {% csrf_token %}
-                                                           <input type="hidden" name="image_id" value="{{ prof.id }}" />
-                                                           <button type="submit" class="btn btn-default btn-lg">
-                                                               <span class="glyphicon glyphicon-edit"></span>
-                                                           </button>
-                                                       </form>
+<!--Delete Album -->
+<form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
+{% csrf_token %}
+<input type="hidden" name="image_id" value="{{ prof.id }}" />
+<button type="submit" class="btn btn-default btn-lg">
+<span class="glyphicon glyphicon-trash"></span>
+</button>
+</form>
+<!--edit-album-->
+   <form action="{% url 'profile-update' prof.id %}" method="post" style="display: inline;">
+       {% csrf_token %}
+       <input type="hidden" name="image_id" value="{{ prof.id }}" />
+       <button type="submit" class="btn btn-default btn-lg">
+           <span class="glyphicon glyphicon-edit"></span>
+       </button>
+   </form>
 
              <div class="col-md-5 col-sm-6">
                 <div class="me-image">
-                  <img  src='{{prof.picture.cdn_url}}' class='img-responsive'>
+                  <img  src='{{prof.prof_pic.cdn_url}}' class='img-responsive'>
               </div>
             </div>
           </div>
@@ -85,7 +85,7 @@
  <div class="row">
       <div class="col-sm-12">
           <div class="section-title">
-              <h2 style='color:#00ff41;'>My images.</h2>
+              <h2 style='color:#00ff41;'>My Posts</h2>
                 <div class="divider dark">
 	   <i class="icon-drop" style='color:#00ff41;' ></i>
 	 </div>
@@ -94,12 +94,9 @@
   </div>
 
 
-<div class="row margin-top-30"  data-toggle="modal" data-target="#{{pic.id}}">
 {% for pic in image %}
-<div class="col-md-4 col-sm-6">
-<div class="services-detail">
-	<i class="fa fa-desktop color-1" aria-hidden="true"></i>
-  <h3 class="color-1"  data-toggle="modal" data-target="#{{pic.id}}">{{pic.image_name}}</h3>
+
+  <h3 >{{pic.image_name}}</h3>
 
 <!-- Delete Album -->
  <form action="{% url 'album-delete' pic.id %}" method="post" style="display: inline;">
@@ -119,19 +116,11 @@
 </form>
 
 
-<!-- Modal -->
-  <div class="modal fade " id="{{pic.id}}" role="dialog" style="color:#00ff41; ">
-    <div class="modal-dialog" >
 
-      <!-- Modal content-->
-      <div class="modal-content"  style="background-color: #000000">
-        <div class="modal-header">
-          <button type="button" class="close"  style="color:#00ff41;" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">{{pic.image_name}}</h4>
-        </div>
-        <div class="modal-body">
-<div>
-<img src="{{pic.image.cdn_url}}" data-toggle="modal" data-target="#{{landing_page.id}}" alt="{{pic.title}}" style="width:80%;height:220px;" >
+          <h4>{{pic.image_name}}</h4>
+
+
+<img src="{{pic.image.cdn_url}}">
 </div>
 <div>
           {% for comment in pic.comments.all %}
@@ -145,17 +134,7 @@
 </div>
 </div>
 
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
 
-    </div>
-  </div>
-
-
-				</div>
-			</div>
       {% endfor %}
       {% else %}
       <p>You have never posted anything</p>

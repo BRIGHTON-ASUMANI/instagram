@@ -13,7 +13,7 @@ class Profile(models.Model):
     bio = models.TextField()
 
     def get_absolute_url(self):
-        return reverse('dump', kwargs={'pk':self.pk})
+        return reverse('lump', kwargs={'pk':self.pk})
 
 
     def __str__(self):
@@ -45,11 +45,14 @@ class Image(models.Model):
     image_caption = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.image_name
 
     def get_absolute_url(self):
         return reverse('profile', kwargs={'pk':self.pk})
+
+
+    def __str__(self):
+        return self.image_name
+
 
     @classmethod
     def all_images(cls):
