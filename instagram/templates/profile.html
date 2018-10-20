@@ -7,7 +7,7 @@
 
 
 <!-- Home Section Start -->
-<section class="home-section">
+<section class="home-section" style="margin-top:20px;">
     <div class="container">
         <div class="row">
 
@@ -40,26 +40,26 @@
         </div>
                  </div>
                </div>
-               <!--Delete Album -->
-                                  <form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
-                                      {% csrf_token %}
-                                      <input type="hidden" name="image_id" value="{{ prof.id }}" />
-                                      <button type="submit" class="btn btn-default btn-lg">
-                                          <span class="glyphicon glyphicon-trash"></span>
-                                      </button>
-                                  </form>
-                                  <!--edit-album-->
-                                                       <form action="{% url 'profile-update' prof.id %}" method="post" style="display: inline;">
-                                                           {% csrf_token %}
-                                                           <input type="hidden" name="image_id" value="{{ prof.id }}" />
-                                                           <button type="submit" class="btn btn-default btn-lg">
-                                                               <span class="glyphicon glyphicon-edit"></span>
-                                                           </button>
-                                                       </form>
+<!--Delete Album -->
+            <form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input type="hidden" name="image_id" value="{{ prof.id }}" />
+                <button type="submit" class="btn btn-default btn-lg">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </form>
+            <!--edit-album-->
+                                 <form action="{% url 'profile-update' prof.id %}" method="post" style="display: inline;">
+                                     {% csrf_token %}
+                                     <input type="hidden" name="image_id" value="{{ prof.id }}" />
+                                     <button type="submit" class="btn btn-default btn-lg">
+                                         <span class="glyphicon glyphicon-edit"></span>
+                                     </button>
+                                 </form>
 
              <div class="col-md-5 col-sm-6">
                 <div class="me-image">
-                  <img  src='{{prof.prof_pic.cdn_url}}' class='img-responsive'>
+                  <img  src='{{prof.prof_pic.cdn_url}}' class='img-responsive img-rounded' style="height: 200px;width: 50%;">
               </div>
             </div>
           </div>
@@ -75,7 +75,6 @@
 {% if image %}
 
 {% for pic in image %}
-
   <h3 >{{pic.image_name}}</h3>
 
 <!-- Delete Album -->
@@ -97,7 +96,7 @@
 
           <h4 >{{pic.image_name}}</h4>
 
-<img src="{{pic.image.cdn_url}}" style="width:80%;height:220px;" >
+<img src="{{pic.image.cdn_url}}" >
 
           {% for comment in pic.comments.all %}
 
