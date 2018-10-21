@@ -5,27 +5,32 @@
 
  <div class="col-md-6 offset-md-3">
 
- {% if image %}
  {% for pic in image %}
+   {% if pic.image %}
 
-  <div class="card" style="margin-bottom:20px;">
-      <div class="card-header">
-        <img src="{{pic.profile.prof_pic.cdn_url}}" class="img-responsive rounded-circle" style="width:12%;height:12%">
+
+
+        <img src="{{pic.profile.prof_pic.cdn_url}}" class="img-responsive rounded-circle" style="width:12%;height:12%" alt='image'>
           {% if profile.user.id == pic.user.id %}
           <a href="{% url 'lump' %}">{{pic.user.username}}</a>
           {% else %}
           <a href="{% url 'lump' pk=pic.user.id %}">{{pic.user.username}}</a>
           {% endif %}
-      </div>
 
 
          <img src="{{pic.image.cdn_url}}" class='img-responsive' class="content" />
+<hr/>
+<i class="far fa-heart fa-2x ml-4"></i> &nbsp;&nbsp;&nbsp;  <i class="far fa-comment fa-2x"></i>
+
+      <i class="far fa-bookmark fa-2x float-right mr-4"></i></a>
           <p style='font-size:20px;'>"{{pic.image_caption}}"</p>
- </div>
+
 
 </hr>
 </hr>
 </hr>
+
+
     <div style="margin:1px;">
     <h3 class='center'>comments</h3>
              {% for comment in pic.comments.all %}
@@ -46,12 +51,12 @@
 </div>
  </br>
  </br>
- {% endfor %}
+
  {% else %}
  <p>Nothing has been posted for now</p>
  {% endif %}
 
-
+{% endfor %}
 
 </div>
 
