@@ -1,13 +1,12 @@
-
 {% extends 'base.html' %}
-{% load bootstrap4 %}
+{% load bootstrap3 %}
 {% block content %}
 {{block.super}}
 
 
 <div class="col-md-6 offset-md-3">
         <div class="card-body">
-                <form action="{%url 'create' %}" method="post" enctype="multipart/form-data">
+                <form action="{%url 'newprofile' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% bootstrap_form form %}
                     <div class="form-group">
@@ -16,7 +15,6 @@
 
                 </form>
 <p><small><a href="{% url 'change_password' %}">click here</a> To change your Password</small></p>
-<p><small><a href="{% url 'edit_profilic' %}">click here</a> for more account settings</small></p>
         </div>
 </div>
 

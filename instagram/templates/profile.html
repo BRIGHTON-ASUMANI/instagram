@@ -2,9 +2,9 @@
 {% load bootstrap4 %}
 {% block content %}
 
+
 {% if profile %}
 {% for prof in profile %}
-
 
 <!-- Home Section Start -->
 <section class="home-section" style="margin-top:20px;">
@@ -36,10 +36,16 @@
             <td>Bio</td>
             <td>{{prof.bio}}</td>
           </tr>
+        <tr>
+        <td>
+        <a href="{% url 'create'%}"><button class="btn profile-edit-btn">Edit Profile</button></a>
+          </td>
+          </tr>
         </table>
         </div>
                  </div>
                </div>
+
 <!--Delete Album -->
             <form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
@@ -69,53 +75,60 @@
 {% endfor %}
 {% else %}
 
-<a href="{% url 'create'%}"> Please create and edit your profile</a>
+
+<button><a href="{% url 'create'%}"> Please create and edit your profile</a></button>
 {% endif %}
 
-{% if image %}
 
-{% for pic in image %}
-  <h3 >{{pic.image_name}}</h3>
+<center><h1>My Posts</h1></center>
 
+
+<div class="container">
+  <div class="row" >
+    {% if image %}
+
+    {% for pic in image %}
+
+ <div class="col-md-3" style='border:1px solid black; margin:20px'>
+
+   <img src="{{pic.image.cdn_url}}"  class='img-responsive'
+     alt="{{pic.image_name}}" style='margin-top:10px;'>
+   <!-- <figcaption> -->
+  <h3>{{pic.image_name}}</h3>
+ <h3>{{pic.image_caption}}</h3>
+<!-- <h3>{{user.username}}</h3> -->
 <!-- Delete Album -->
- <form action="{% url 'album-delete' pic.id %}" method="post" style="display: inline;">
-     {% csrf_token %}
-     <input type="hidden" name="image_id" value="{{ pic.id }}" />
-     <button type="submit" class="btn btn-default btn-lg">
-         <span class="glyphicon glyphicon-trash"></span>
-     </button>
+{% for comment in pic.comments.all %}
+
+  <div>{{comment.text}}</div>
+
+
+   {% endfor %}
+
+  <form action="{% url 'album-delete' pic.id %}" method="post" style="display: inline;">
+      {% csrf_token %}
+      <input type="hidden" name="project_id" value="{{ pic.id }}" />
+      <button style="margin-bottom:20px;"  type="submit" class="btn btn-danger btn-lg">
+          <span class="glyphicon glyphicon-trash"></span>
+      </button>
+  </form>
+  <!--edit-album-->
+   <form action="{% url 'album-update' pic.id %}" method="post" style="display: inline;">
+ {% csrf_token %}
+   <input type="hidden" name="project_id" value="{{ pic.id }}" />
+   <button style="margin-bottom:20px;" type="submit" class="btn btn-primary btn-lg">
+       <span class="glyphicon glyphicon-edit"></span>
+   </button>
  </form>
- <!--edit-album-->
-  <form action="{% url 'album-update' pic.id %}" method="post" style="display: inline;">
-{% csrf_token %}
-  <input type="hidden" name="image_id" value="{{ pic.id }}" />
-  <button type="submit" class="btn btn-default btn-lg">
-      <span class="glyphicon glyphicon-edit"></span>
-  </button>
-</form>
-
-          <h4 >{{pic.image_name}}</h4>
-
-<img src="{{pic.image.cdn_url}}" >
-
-          {% for comment in pic.comments.all %}
-
-            {{comment.text}}
-
-
-             {% endfor %}
-
-       </br>
+ </div>
+   {% endfor %}
+ </div>
+</div>
 
 
 
-      {% endfor %}
       {% else %}
-      <p>You have never posted anything</p>
+      <p>Nothing has been posted for now</p>
       {% endif %}
-
-
-
-
 
 {% endblock %}

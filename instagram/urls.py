@@ -11,7 +11,7 @@ urlpatterns=[
     url('logout/',views.logout_user, name='logout'),
     url('register/',views.register_user, name='register'),
     url('profile/',views.profile, name='profile'),
-    url('edit_profile/',views.edit_profile, name='edit_profile'),
+    url('edit_profilic/',views.edit_profilic, name='edit_profilic'),
     url('change_password/',views.change_password, name='change_password'),
     url(r'^post/$', views.new_image, name='new_image'),
     url(r'^comments/(\d+)', views.comment, name='comments'),
@@ -22,6 +22,7 @@ urlpatterns=[
     url( r'project/(?P<pk>[0-9]+)/delete/$' , views.AlbumDelete.as_view( ) , name='album-delete' ) ,
     url( r'profile/(?P<pk>[0-9]+)/delete/$' , views.ProfileDelete.as_view( ) , name='profile-delete' ) ,
     url( r'^create/$' , views.create , name='create' ),
+    url( r'^like/(?P<up>.+)/(?P<pk>\d+)' , views.like , name='like' ),
 
 ]
 if settings.DEBUG:

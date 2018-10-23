@@ -128,21 +128,21 @@ def new_image(request):
         form = ImageForm()
     return render(request, 'image.html', {"form": form})
 
-def edit_profile(request):
+def edit_profilic(request):
     current_user = request.user
     if request.method == 'POST':
-        form = EditProfileForm(request.POST, instance=request.user, data=request.FILES)
+        form = EditProfileForm(request.POST, instance=request.user)
         if form.is_valid():
             profile = form.save(commit=False)
             profile.user = current_user
             profile.save()
             messages.success(request, ('You have editted your profile' ))
-            return redirect('home')
+            return redirect('create')
 
     else:
         form = EditProfileForm(instance=request.user)
 
-    return render(request, 'edit_profile.html',context)
+    return render(request, 'edit_profile.html',{"form": form, "current_user": current_user})
 
 @login_required(login_url='/login')
 def lump(request,pk):
@@ -179,8 +179,19 @@ class ProfileUpdate(UpdateView):
 
 class AlbumDelete(DeleteView):
    model=Image
-   success_url = reverse_lazy('home')
+   success_url = reverse_lazy('profile')
 
 class ProfileDelete(DeleteView):
    model=Profile
    success_url = reverse_lazy('profile')
+
+@login_required( login_url="/login" )
+def like(request , up , pk):
+    image=get_object_or_404( Image , pk=pk )
+    if up == 'like':
+        image.likes+=1
+        image.save( )
+    elif up == 'unlike':
+        image.likes-=1
+        image.save( )
+    return redirect( 'home' )

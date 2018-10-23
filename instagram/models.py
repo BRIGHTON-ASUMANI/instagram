@@ -44,6 +44,7 @@ class Image(models.Model):
     image_name = models.CharField(max_length =30)
     image_caption = models.TextField()
     post_date = models.DateTimeField(auto_now_add=True)
+    likes=models.PositiveIntegerField( default=0)
 
 
     def get_absolute_url(self):
@@ -106,12 +107,3 @@ class Follower(models.Model):
 
     def __unicode__(self):
         return u'%s follows %s' % (self.follower, self.following)
-
-class Likes(models.Model):
-    likes = models.IntegerField()
-    image = models.ForeignKey(Image, related_name='likes', on_delete=models.CASCADE, null=True)
-    user = models.ForeignKey(User, related_name='dislikes', on_delete=models.CASCADE, null=True)
-
-
-    def __str__(self):
-        return str(self.likes)
