@@ -104,7 +104,9 @@
 
 
    {% endfor %}
-
+   {% if pic.likes >= 1 %}
+       <p><i class="fa fa-heart fa-2x ml-4" style="color:red"></i><b>{{pic.likes}} likes</b></p>
+       {% endif %}
   <form action="{% url 'album-delete' pic.id %}" method="post" style="display: inline;">
       {% csrf_token %}
       <input type="hidden" name="project_id" value="{{ pic.id }}" />

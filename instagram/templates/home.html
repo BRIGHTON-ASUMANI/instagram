@@ -38,6 +38,16 @@
              </br>
              {% endfor %}
 
+             {% if pic.likes >= 1  %}
+           <div class="row">
+                   <h5 style="padding:8px; color:red;"><b>{{pic.likes}} likes </b></h5>
+
+           </div>
+
+
+             {% endif %}
+             <div class="row">
+
 </div>
 <div>
              <form id='comment' action="/comments/{{pic.id}}" method="post" enctype="multipart/form-data">
