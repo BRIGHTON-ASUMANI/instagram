@@ -16,6 +16,12 @@ class Profile(models.Model):
         return reverse('lump', kwargs={'pk':self.pk})
 
 
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+
     def __str__(self):
         return self.user.username
 
@@ -50,6 +56,31 @@ class Image(models.Model):
     def get_absolute_url(self):
         return reverse('profile', kwargs={'pk':self.pk})
 
+    @classmethod
+    def save_image(self):
+        self.save()
+    @classmethod
+    def get_images(cls):
+         images = cls.objects.all()
+         return images
+    @classmethod
+    def delete_image(self):
+        self.delete()
+
+    def save_image(self):
+        self.save()
+
+    @classmethod
+    def delete_image_by_id(cls, id):
+        pic = cls.objects.filter(pk=id)
+        pic.delete()
+
+    @classmethod
+    def get_image_by_id(cls, id):
+        pic = cls.objects.get(pk=id)
+        return pic
+
+
 
     def __str__(self):
         return self.image_name
@@ -57,7 +88,7 @@ class Image(models.Model):
 
     @classmethod
     def all_images(cls):
-        image = cls.objects.order_by('post_date')
+        image = cls.objects.order_by('image_date')
         return image
 
     @classmethod

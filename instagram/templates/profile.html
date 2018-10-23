@@ -5,11 +5,11 @@
 
 {% if profile %}
 {% for prof in profile %}
-
+<div class="container-fluid">
 <!-- Home Section Start -->
 <section class="home-section" style="margin-top:20px;">
     <div class="container">
-  <center><h1>Hi {{user.username}} post something<a href="{% url 'create'%}">&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-primary'>post</button></a></h1></center>
+  <center><h1>Hi {{user.username}} post something&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'new_image'%}"><button class='btn btn-primary'>post</button></a></h1></center>
         <div class="row">
 
              <div class="col-sm-offset-2 col-md-4 col-sm-6 margin-left-setting">
@@ -92,7 +92,7 @@
 
  <div class="col-md-3" style='border:1px solid black; margin:20px'>
 
-   <img src="{{pic.image.cdn_url}}"  class='img-responsive'
+   <img src="{{pic.image.cdn_url}}" style="max-width:200px;" class='img-responsive'
      alt="{{pic.image_name}}" style='margin-top:10px;'>
    <!-- <figcaption> -->
   <h3>{{pic.image_name}}</h3>
@@ -130,5 +130,5 @@
       {% else %}
       <p>Nothing has been posted for now</p>
       {% endif %}
-
+</div>
 {% endblock %}

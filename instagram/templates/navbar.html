@@ -1,10 +1,10 @@
 {% load static %}
 <nav class="navbar">
-  <section class="logo-section"><a href="{% url 'home'%}"><img class="logo" src="{% static 'images/dm.jpeg'%}"  style="width:60px;height:80px;" /></a>
+  <section class="logo-section"><a href="{% url 'home'%}"><img class="logo" src="{% static 'images/dm.jpeg'%}"  style="width:80px;height:80px;" /></a>
     <div></div><a href="{% url 'home'%}"><img class="logoname" src="{% static 'images/inst.png'%}" style="width:80px;" /></a>
   </section>
-  <form class="search-section">
-    <input class="input-search" type="search" name="search" placeholder="Search" />
+  <form class="search-section" form action="{%url 'search'%}">
+    <input class="input-search" type="text" name="user" placeholder="Search" />
   </form>
   <section class="icons-section">
 

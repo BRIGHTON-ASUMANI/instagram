@@ -2,7 +2,7 @@
 {% load bootstrap4 %}
 {% load static %}
 {% block content %}
-<div class="container">
+<div class="container-fluid">
  <div class="col-md-6 offset-md-3">
 
  {% for pic in image %}
@@ -10,15 +10,17 @@
 
 
 
+
+  {% if profile.user.id == pic.user.id %}
         <img src="{{pic.profile.prof_pic.cdn_url}}" class="img-responsive rounded-circle" style="width:12%;height:12%" alt='image'>
-          {% if profile.user.id == pic.user.id %}
+
           <a href="{% url 'lump' %}">{{pic.user.username}}</a>
           {% else %}
           <a href="{% url 'lump' pk=pic.user.id %}">{{pic.user.username}}</a>
           {% endif %}
 
 
-         <img src="{{pic.image.cdn_url}}" class='img-responsive' class="content" />
+         <img src="{{pic.image.cdn_url}}" class='img-responsive' style="max-width:400px;" class="content" />
 <hr/><div class="icons mt-3">
                     <a id="like" href="{% url 'like' up='like' pk=pic.id%}" style="color:inherit;">
                             <i class="far fa-heart fa-2x ml-4"></i>
@@ -74,6 +76,7 @@
 
 {% endfor %}
 
+</div>
 </div>
 </div>
 {% endblock %}

@@ -1,29 +1,17 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
 {% block content %}
 
-<!--
-
 <div class="container-fluid">
+<div class="row">
+  {% if user %}
+    {% for user in user %}
 
-  <div class="row">
-    {% if articles%}
-      <h2> {{ profile|length }}}</h2>
-    {% else %}
-      <center><h1 class='my-font-bold'> {{message}} - Dogs</h></center>
-    {% endif %}
-
-  </div> -->
-
-
-
-  {% if profile %}
-  <section id="photos">
-    {% for user in profile %}
-    <img src="{{profile.profile.url}}" class="img-responsive " alt="Image" style="margin:10px;">
+  <h1>{{user.username}}</h1>
 
     {% endfor %}
-  </section>
-
-  {% endif %}
-
+    {% else %}
+    <h1>NO Users with that username</h1>
+    {% endif %}
+</div>
+</div>
 {% endblock %}

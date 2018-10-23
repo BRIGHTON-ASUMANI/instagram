@@ -195,3 +195,14 @@ def like(request , up , pk):
         image.likes-=1
         image.save( )
     return redirect( 'home' )
+
+def search_results(request):
+
+    if 'user' in request.GET or request.GET['user']:
+        search_item = request.GET.get('user')
+        searched_users = User.objects.filter(username=search_item)
+        # message = f"{search_item}"
+        return render(request, 'search.html',{"user": searched_users})
+    else:
+        message = "You haven't searched for any user"
+        return render(request, 'search.html',{"message":message})
