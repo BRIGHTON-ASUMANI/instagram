@@ -9,6 +9,7 @@
 <!-- Home Section Start -->
 <section class="home-section" style="margin-top:20px;">
     <div class="container">
+  <center><h1>Hi {{user.username}} post something<a href="{% url 'create'%}">&nbsp;&nbsp;&nbsp;&nbsp;<button class='btn btn-primary'>post</button></a></h1></center>
         <div class="row">
 
              <div class="col-sm-offset-2 col-md-4 col-sm-6 margin-left-setting">
@@ -50,7 +51,7 @@
             <form action="{% url 'profile-delete' prof.id %}" method="post" style="display: inline;">
                 {% csrf_token %}
                 <input type="hidden" name="image_id" value="{{ prof.id }}" />
-                <button type="submit" class="btn btn-default btn-lg">
+                <button type="submit" class="btn btn-danger btn-lg">
                     <span class="glyphicon glyphicon-trash"></span>
                 </button>
             </form>
@@ -58,7 +59,7 @@
                                  <form action="{% url 'profile-update' prof.id %}" method="post" style="display: inline;">
                                      {% csrf_token %}
                                      <input type="hidden" name="image_id" value="{{ prof.id }}" />
-                                     <button type="submit" class="btn btn-default btn-lg">
+                                     <button type="submit" class="btn btn-primary btn-lg">
                                          <span class="glyphicon glyphicon-edit"></span>
                                      </button>
                                  </form>
@@ -102,7 +103,6 @@
 
   <div>{{comment.text}}</div>
 
-
    {% endfor %}
    {% if pic.likes >= 1 %}
        <p><i class="fa fa-heart fa-2x ml-4" style="color:red"></i><b>{{pic.likes}} likes</b></p>
@@ -126,8 +126,6 @@
    {% endfor %}
  </div>
 </div>
-
-
 
       {% else %}
       <p>Nothing has been posted for now</p>

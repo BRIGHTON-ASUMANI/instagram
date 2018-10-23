@@ -1,6 +1,6 @@
 {% load static %}
 <nav class="navbar">
-  <section class="logo-section"><a href="{% url 'home'%}"><img class="logo" src="{% static 'images/dm.jpeg'%}" /></a>
+  <section class="logo-section"><a href="{% url 'home'%}"><img class="logo" src="{% static 'images/dm.jpeg'%}"  style="width:60px;height:80px;" /></a>
     <div></div><a href="{% url 'home'%}"><img class="logoname" src="{% static 'images/inst.png'%}" style="width:80px;" /></a>
   </section>
   <form class="search-section">
@@ -8,9 +8,9 @@
   </form>
   <section class="icons-section">
 
-<i class="fa fa-compass" href="#"></i>
-<i class="fa fa-heart-o" href="#"></i>
-<a href="{% url 'profile'%}" style="color:black;"><i class="fa fa-user-o"></i></a>
+<i class="fa fa-compass" href="#" style="width:20px;height:40px;"></i>
+<i class="fa fa-heart" href="#" style="width:20px;height:40px;"></i>
+<a href="{% url 'profile'%}" style="color:black;height:40px;"><i class="fa fa-user"></i></a>
 
 </section>
 </nav>

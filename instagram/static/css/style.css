@@ -499,3 +499,60 @@ display: block;
 position: absolute;
 top: 0px;
 }
+
+
+
+$gutter: 10px;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $gutter * 2;
+  border-bottom: 2px solid #ddd;
+
+  .logo-section {
+    display: flex;
+    align-items: center;
+
+    div {
+      align-self: stretch;
+      width: 1px;
+      background: black;
+      margin: 0 $gutter * 2;
+    }
+  }
+
+  .search-section {
+
+  }
+
+  .icons-section {
+    .fa {
+      text-decoration: none;
+      color: inherit;
+      font-size: 2rem;
+      margin: 0 $gutter;
+    }
+  }
+
+  .logo {
+    width: 40px;
+  }
+
+  .logoname {
+    width: 130px;
+  }
+
+  .input-search {
+    padding: $gutter;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solix #ddd;
+    outline: 0;
+
+    &:focus {
+      text-align: left;
+    }
+  }
+}
