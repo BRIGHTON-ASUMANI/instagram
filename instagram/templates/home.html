@@ -19,10 +19,16 @@
 
 
          <img src="{{pic.image.cdn_url}}" class='img-responsive' class="content" />
-<hr/>
-<i class="far fa-heart fa-2x ml-4"></i> &nbsp;&nbsp;&nbsp;  <i class="far fa-comment fa-2x"></i>
+<hr/><div class="icons mt-3">
+                    <a id="like" href="{% url 'like' up='like' pk=pic.id%}" style="color:inherit;">
+                            <i class="far fa-heart fa-2x ml-4"></i>
+                    </a>
 
-      <i class="far fa-bookmark fa-2x float-right mr-4"></i></a>
+                    <a href="{% url 'comment' pk=pic.id %}" style="color:inherit;"><i class="far fa-comment fa-2x ml-4"></i></a>
+
+                    <a href="#" style="color:inherit;"><i class="far fa-bookmark fa-2x float-right mr-4"></i></a>
+                  </div>
+
           <p style='font-size:20px;'>"{{pic.image_caption}}"</p>
 
 
